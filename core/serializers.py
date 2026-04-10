@@ -6,6 +6,12 @@ class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate
         fields = '__all__'
+    
+    
+    def validate_email(self, value):
+        if Candidate.objects.filter(email=value).exists():
+            raise serializers.ValidationError('Email already exists')
+        return value
 
 
 class ApplicationSerializer(serializers.ModelSerializer):

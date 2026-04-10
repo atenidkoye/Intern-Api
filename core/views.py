@@ -17,7 +17,7 @@ class ApplicationListCreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         queryset = Application.objects.all()
-        status = self.request.query_param.get('status')
+        status = self.request.query_params.get('status')
         
         if status:
             queryset = queryset.filter(status=status)
